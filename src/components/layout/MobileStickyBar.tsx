@@ -16,7 +16,7 @@ export function MobileStickyBar() {
   );
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-steel/15 bg-white/95 backdrop-blur md:hidden">
+    <div className="mobile-sticky-bar fixed inset-x-0 bottom-0 z-40 border-t border-steel/15 bg-white/95 backdrop-blur md:hidden">
       <div className="grid grid-cols-2 gap-2 p-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         <a
           href={`tel:${SITE.phoneTel}`}

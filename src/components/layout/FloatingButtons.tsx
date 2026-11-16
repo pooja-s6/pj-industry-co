@@ -47,7 +47,7 @@ export function FloatingButtons() {
   if (!wa) return null;
 
   return (
-    <div className="pointer-events-none fixed right-4 bottom-24 z-40 flex flex-col items-end gap-3 md:bottom-6">
+    <div className="floating-buttons pointer-events-none fixed right-4 bottom-24 z-40 flex flex-col items-end gap-3 md:bottom-6">
       <a
         href={wa}
         target="_blank"

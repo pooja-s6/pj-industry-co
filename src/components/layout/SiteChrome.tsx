@@ -53,11 +53,16 @@ function SiteChromeInner() {
   }, [activeCategory]);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      document.body.classList.remove("mobile-menu-open");
+      return;
+    }
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    document.body.classList.add("mobile-menu-open");
     return () => {
       document.body.style.overflow = prev;
+      document.body.classList.remove("mobile-menu-open");
     };
   }, [open]);
 
@@ -241,23 +246,25 @@ function SiteChromeInner() {
       <div
         id="mobile-menu"
         className={cn(
-          "fixed inset-0 z-[60] bg-navy transition-transform duration-300 xl:hidden",
+          "fixed inset-0 z-[80] flex h-[100dvh] flex-col bg-navy transition-transform duration-300 xl:hidden",
           open ? "translate-x-0" : "pointer-events-none translate-x-full",
         )}
+        aria-hidden={!open}
       >
-        <Container className="flex h-full flex-col pt-20 pb-10">
-          <div className="mb-4 flex justify-end">
-            <button
-              type="button"
-              className="inline-flex size-11 items-center justify-center text-white"
-              aria-label="Close menu"
-              onClick={() => setOpen(false)}
-            >
-              <X className="size-7" />
-            </button>
-          </div>
+        <div className="flex shrink-0 items-center justify-end px-4 pt-[max(0.5rem,env(safe-area-inset-top))]">
+          <button
+            type="button"
+            className="inline-flex size-12 items-center justify-center text-white"
+            aria-label="Close menu"
+            onClick={() => setOpen(false)}
+          >
+            <X className="size-7" />
+          </button>
+        </div>
+
+        <Container className="flex min-h-0 flex-1 flex-col pb-[max(1rem,env(safe-area-inset-bottom))]">
           <nav
-            className="flex flex-1 flex-col gap-1 overflow-y-auto"
+            className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overscroll-contain"
             aria-label="Mobile"
           >
             {SITE.nav.map((item) => (
@@ -265,6 +272,7 @@ function SiteChromeInner() {
                 <Link
                   href={item.href}
                   className="block border-b border-white/10 py-4 font-heading text-2xl font-semibold text-white"
+                  onClick={() => setOpen(false)}
                 >
                   {item.label}
                 </Link>
@@ -278,6 +286,7 @@ function SiteChromeInner() {
                           ? "text-teal"
                           : "text-white/75",
                       )}
+                      onClick={() => setOpen(false)}
                     >
                       All products
                     </Link>
@@ -291,6 +300,7 @@ function SiteChromeInner() {
                             ? "text-teal"
                             : "text-white/75",
                         )}
+                        onClick={() => setOpen(false)}
                       >
                         {cat.label}
                       </Link>
@@ -300,19 +310,27 @@ function SiteChromeInner() {
               </div>
             ))}
           </nav>
-          {!onEnquiry ? (
-            <ButtonLink href="/enquiry" variant="quote" className="w-full">
-              Request a Quote
-            </ButtonLink>
-          ) : (
-            <a
-              href={`tel:${SITE.phoneTel}`}
-              className="inline-flex min-h-11 w-full items-center justify-center gap-2 bg-blue text-sm font-medium text-white"
-            >
-              <Phone className="size-4" aria-hidden />
-              Call {SITE.phoneDisplay}
-            </a>
-          )}
+
+          <div className="shrink-0 border-t border-white/10 pt-4">
+            {!onEnquiry ? (
+              <ButtonLink
+                href="/enquiry"
+                variant="quote"
+                className="w-full"
+                onClick={() => setOpen(false)}
+              >
+                Request a Quote
+              </ButtonLink>
+            ) : (
+              <a
+                href={`tel:${SITE.phoneTel}`}
+                className="inline-flex min-h-11 w-full items-center justify-center gap-2 bg-blue text-sm font-medium text-white"
+              >
+                <Phone className="size-4" aria-hidden />
+                Call {SITE.phoneDisplay}
+              </a>
+            )}
+          </div>
         </Container>
       </div>
     </>

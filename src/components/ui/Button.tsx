@@ -25,10 +25,12 @@ export function ButtonLink({
   children,
   className,
   variant = "primary",
-}: Common & { href: string }) {
+  onClick,
+}: Common & { href: string; onClick?: () => void }) {
   return (
     <Link
       href={href}
+      onClick={onClick}
       className={cn(
         "inline-flex min-h-11 items-center justify-center px-5 py-2.5 text-sm font-medium tracking-wide transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
         variants[variant],

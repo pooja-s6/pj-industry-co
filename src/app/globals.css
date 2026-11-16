@@ -48,6 +48,13 @@ body {
   line-height: 1.6;
 }
 
+/* Hide bottom chrome while the fullscreen mobile nav is open */
+body.mobile-menu-open .mobile-sticky-bar,
+body.mobile-menu-open .floating-buttons {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 /* Prevent dark hero/content bleeding through sticky chrome */
 .sticky {
   isolation: isolate;
