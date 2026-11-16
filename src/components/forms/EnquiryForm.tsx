@@ -57,7 +57,8 @@ export function EnquiryForm({ defaultProduct = "", compact = false }: Props) {
           Enquiry received
         </h3>
         <p className="mt-2 text-steel">
-          Thank you. We will get back to you shortly. For urgent needs, call{" "}
+          Thank you. A confirmation email is on its way, and our team will
+          contact you shortly. For urgent needs, call{" "}
           <a href={`tel:${SITE.phoneTel}`} className="font-medium text-teal">
             {SITE.phoneDisplay}
           </a>
