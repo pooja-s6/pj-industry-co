@@ -1,0 +1,271 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand from PJ business card: magenta + bright blue */
+  --navy: #1a1220; /* deep ink for dark sections / strong text (not blue) */
+  --teal: #e2187a; /* brand pink / magenta */
+  --blue: #0088cc; /* card accent blue */
+  --steel: #5f6b7a;
+  --light: #fdf4f8;
+  --charcoal: #1f2933;
+  --white: #ffffff;
+  --header-h: 72px;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-teal: var(--teal);
+  --color-blue: var(--blue);
+  --color-steel: var(--steel);
+  --color-light: var(--light);
+  --color-charcoal: var(--charcoal);
+  --color-white: var(--white);
+  --font-heading: var(--font-barlow);
+  --font-sans: var(--font-inter);
+  --shadow-card: 0 8px 24px rgba(26, 18, 32, 0.08);
+  --shadow-card-hover: 0 12px 32px rgba(226, 24, 122, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--white);
+  color: var(--charcoal);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Prevent dark hero/content bleeding through sticky chrome */
+.sticky {
+  isolation: isolate;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-barlow), system-ui, sans-serif;
+  /* Do not set color here — Tailwind utilities (e.g. text-white) must win */
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+.label {
+  font-family: var(--font-barlow), system-ui, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: var(--teal);
+}
+
+.container-site {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.section-pad {
+  padding-block: 3.5rem;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 17px;
+  }
+
+  .section-pad {
+    padding-block: 6rem;
+  }
+}
+
+.card-lift {
+  border-radius: 8px;
+  box-shadow: var(--shadow-card);
+  border-top: 3px solid transparent;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  border-top-color: var(--teal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-lift:hover {
+    transform: none;
+  }
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.placeholder-box {
+  border: 1px dashed #c4a0b0;
+  background: repeating-linear-gradient(
+    -45deg,
+    #fdf4f8,
+    #fdf4f8 8px,
+    #f5e6ee 8px,
+    #f5e6ee 16px
+  );
+  color: var(--steel);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.875rem;
+}
+
+.placeholder-text {
+  background: #fff8e6;
+  color: #8a6d1d;
+  border: 1px solid #f0d78c;
+  border-radius: 4px;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* Horizontal client logo marquee (X-axis) */
+.client-marquee {
+  width: 100%;
+  overflow: hidden;
+  padding-block: 0.5rem;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 5%,
+    #000 95%,
+    transparent
+  );
+}
+
+.client-marquee-track {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: max-content;
+  gap: 2.75rem;
+  padding-inline: 1rem;
+  /* Animation starts only when .client-marquee-track--running is added (in view) */
+  animation: none;
+  will-change: transform;
+}
+
+.client-marquee-track--running {
+  animation: client-marquee-rtl 30s linear infinite;
+}
+
+.client-marquee:hover .client-marquee-track--running {
+  animation-play-state: paused;
+}
+
+.client-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 12.5rem;
+  padding: 1.25rem 1.25rem;
+  gap: 0.75rem;
+  background: transparent;
+  border: none;
+  /* Never greyscale brand logos */
+  filter: none !important;
+  -webkit-filter: none !important;
+  transition: transform 0.25s ease;
+}
+
+.client-logo:hover {
+  transform: translateY(-2px);
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+
+.client-logo-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 176px;
+  height: 65px;
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+
+.client-logo-media {
+  width: 176px;
+  height: 65px;
+  object-fit: contain;
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+
+.client-logo-name {
+  margin: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--steel);
+}
+
+.client-logo:hover .client-logo-name {
+  color: var(--navy);
+}
+
+/* Right → left continuous loop (2 copies = -50%) */
+@keyframes client-marquee-rtl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
