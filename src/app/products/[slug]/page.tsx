@@ -6,8 +6,8 @@ import { CheckCircle2 } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
-import { SiteImage } from "@/components/ui/SiteImage";
 import { ProductCard } from "@/components/products/ProductCard";
+import { ProductMedia } from "@/components/products/ProductMedia";
 import {
   getProduct,
   getRelatedProducts,
@@ -97,26 +97,12 @@ async function ProductDetailContent({ params }: { params: Params }) {
       <Section tone="white">
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
-            <SiteImage
-              src={product.image}
-              alt={`${product.name} manufactured by PJ Industries`}
-              aspect="4/3"
+            <ProductMedia
+              name={product.name}
+              image={product.image}
+              gallery={product.gallery}
               priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
             />
-            {product.gallery.length > 0 ? (
-              <div className="mt-3 grid grid-cols-3 gap-3">
-                {product.gallery.map((src, i) => (
-                  <SiteImage
-                    key={src}
-                    src={src}
-                    alt={`${product.name} photo ${i + 2}`}
-                    aspect="4/3"
-                    sizes="20vw"
-                  />
-                ))}
-              </div>
-            ) : null}
           </div>
 
           <div>
