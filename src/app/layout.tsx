@@ -26,6 +26,10 @@ export const metadata: Metadata = {
   },
   description:
     "PJ Industries manufactures and services hydraulic power packs, presses, cylinders, cooling systems and special machines in Chennai since 2011.",
+  icons: {
+    icon: [{ url: "/images/about/logo.jpeg", type: "image/jpeg" }],
+    apple: [{ url: "/images/about/logo.jpeg", type: "image/jpeg" }],
+  },
   openGraph: {
     title: "PJ Industries",
     description:
@@ -34,6 +38,7 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     locale: "en_IN",
     type: "website",
+    images: [{ url: "/images/about/logo.jpeg", alt: "PJ Industries logo" }],
   },
 };
 
