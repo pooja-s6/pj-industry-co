@@ -89,9 +89,21 @@ export function Footer() {
       </Container>
 
       <div className="border-t border-white/10">
-        <Container className="flex flex-col gap-2 py-4 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">
+        <Container className="flex flex-col gap-3 py-4 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 PJ Industries. All rights reserved.</p>
-          <p>Hydraulic equipment manufacturer, Chennai</p>
+          <div className="flex flex-col gap-1 sm:items-end">
+            <p>Hydraulic equipment manufacturer, Chennai</p>
+            {SITE.indiamart ? (
+              <a
+                href={SITE.indiamart}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/75 hover:text-teal"
+              >
+                PJ Industries on IndiaMART
+              </a>
+            ) : null}
+          </div>
         </Container>
       </div>
     </footer>

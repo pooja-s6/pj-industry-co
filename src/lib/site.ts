@@ -54,6 +54,8 @@ export const SITE = {
     { href: "/contact", label: "Contact" },
   ],
   url: "https://pjindustries.in",
+  /** Public company listing */
+  indiamart: "https://www.indiamart.com/pjindustries-chennai",
 } as const;
 
 export function whatsappUrl(message?: string) {
